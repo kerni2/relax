@@ -1,4 +1,4 @@
-<%= form_with(model: item) do |form| %>
+<%= form_with(model: item, local: true, multipart: true) do |form| %>
   <% if item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <div class="mb-6">
+    <%= form.label :thumbnail, "Item thumbnail", class: "label" %>
+    <%= form.file_field :thumbnail %>
+  </div>
 
   <div class="field">
     <%= form.label :title %>
@@ -19,7 +23,7 @@
 
   <div class="field">
     <%= form.label :body %>
-    <%= form.text_field :body %>
+    <%= form.rich_text_area :body %>
   </div>
 
   <div class="field">

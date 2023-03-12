@@ -8,21 +8,22 @@
         <div class="row">
           <% @items.each do |item| %>
             <div class="col-sm-6">
-              <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+              <div class="card">
+                <%= image_tag item.thumbnail if item.thumbnail.present? %>
                   <div class="card-body">
                     <h5 class="card-title"><%= item.title %></h5>
-                    <p class="card-text"><%= item.body %></p>
+                    <p class="card-text"><%= truncate(strip_tags(item.body.to_s), length: 140) %></p>
+
                     <p class="card-text"><%= item.price %></p>   
-                      <%= link_to 'Show', item %>
-                      <%= link_to 'Edit', edit_item_path(item) %>
-                      <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%= link_to 'Show', item if user_signed_in? %>
+                      <%= link_to 'Edit', edit_item_path(item) if user_signed_in? %>
+                      <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? %>
                   </div>
                 </div>
               </div>
            <% end %>
         </div>
-        <%= link_to 'New Item', new_item_path%>
+        <%= link_to 'New Item', new_item_path if user_signed_in? %>
       </div>
     </div>
   </section>

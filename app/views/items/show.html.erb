@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Image:</strong>
+  <%= @item.thumbnail if @item.thumbnail.present?%>
+</p>
+
+<p>
   <strong>Title:</strong>
   <%= @item.title %>
 </p>
